@@ -1,21 +1,40 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
+import {
+  FETCH_ALL,
+  FETCH_BY_SEARCH,
+  CREATE,
+  UPDATE,
+  DELETE,
+  LIKE,
+} from "../constants/actionTypes";
 
-const postsReducer = (posts = [], action) => {
+const postsReducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_ALL:
-      return action.payload;  // Actual post
+      return {
+        ...state,
+        posts: action.payload.data,
+        currentPage: action.payload.currentPage,
+        numberOfPages: action.payload.numberOfPages,
+      };
+    case FETCH_BY_SEARCH:
+      return { ...state, posts: action.payload.data };
     case CREATE:
-      return [...posts, action.payload];
-    case DELETE:
-      return posts.filter((post) => post._id !== action.payload);
-      // filter() is return all elements that pass the test
+      return [...state, action.payload];
     case UPDATE:
-      return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
-      // action.payload is the newly updated post
+      return state.map(
+        (post) => (post._id === action.payload._id ? action.payload : post)
+        // action.payload is the newly updated post
+      );
+    case DELETE:
+      return state.filter((post) => post._id !== action.payload);
+    // filter() is return all elements that pass the test
     case LIKE:
-      return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
+      return state.posts.map((post) =>
+        post._id === action.payload._id ? action.payload : post
+      );
+
     default:
-      return posts;
+      return state;
   }
 };
 
