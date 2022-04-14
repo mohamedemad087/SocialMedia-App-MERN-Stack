@@ -5,10 +5,16 @@ import {
   UPDATE,
   DELETE,
   LIKE,
+  START_LOADING,
+  STOP_LOADING,
 } from "../constants/actionTypes";
 
-const postsReducer = (state = [], action) => {
+const postsReducer = (state = { isLoading: true, posts: [] }, action) => {
   switch (action.type) {
+    case START_LOADING:
+      return { ...state, isLoading: true };
+    case STOP_LOADING:
+      return { ...state, isLoading: false };
     case FETCH_ALL:
       return {
         ...state,
@@ -19,19 +25,28 @@ const postsReducer = (state = [], action) => {
     case FETCH_BY_SEARCH:
       return { ...state, posts: action.payload.data };
     case CREATE:
-      return [...state, action.payload];
+      return { ...state, posts: [...state.posts, action.payload] };
     case UPDATE:
-      return state.map(
-        (post) => (post._id === action.payload._id ? action.payload : post)
-        // action.payload is the newly updated post
-      );
+      return {
+        ...state,
+        posts: state.posts.map(
+          (post) => (post._id === action.payload._id ? action.payload : post)
+          // action.payload is the newly updated post
+        ),
+      };
     case DELETE:
-      return state.filter((post) => post._id !== action.payload);
-    // filter() is return all elements that pass the test
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== action.payload),
+        // filter() is return all elements that pass the test
+      };
     case LIKE:
-      return state.posts.map((post) =>
-        post._id === action.payload._id ? action.payload : post
-      );
+      return {
+        ...state,
+        posts: state.posts.posts.map((post) =>
+          post._id === action.payload._id ? action.payload : post
+        ),
+      };
 
     default:
       return state;

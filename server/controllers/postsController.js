@@ -6,7 +6,7 @@ export const getPosts = async (req, res) => {
   const { page } = req.query;
 
   try {
-    const LIMIT = 8; // number of posts to show per page
+    const LIMIT = 6; // number of posts to show per page
     const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
 
     const total = await Post.countDocuments({}); // get the total number of posts
