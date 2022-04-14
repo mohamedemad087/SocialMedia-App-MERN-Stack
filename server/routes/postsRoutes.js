@@ -1,12 +1,20 @@
 import express from "express";
 
-import { getPosts, createPost, updatePost, deletePost, likePost } from "../controllers/postController.js";
-import auth from '../middleware/authMiddleware.js';
+import {
+  getPostsBySearch,
+  getPosts,
+  createPost,
+  updatePost,
+  deletePost,
+  likePost,
+} from "../controllers/postsController.js";
+import auth from "../middleware/authMiddleware.js";
 
 // Setup router
 const router = express.Router();
 
 // Adding routes
+router.get("/search", getPostsBySearch);
 router.get("/", getPosts);
 router.post("/", auth, createPost);
 // :id is to make id dynamic
