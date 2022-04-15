@@ -1,4 +1,6 @@
 import {
+  START_LOADING,
+  STOP_LOADING,
   FETCH_POST,
   FETCH_ALL,
   FETCH_BY_SEARCH,
@@ -6,8 +8,7 @@ import {
   UPDATE,
   DELETE,
   LIKE,
-  START_LOADING,
-  STOP_LOADING,
+  ADD_COMMENT,
 } from "../constants/actionTypes";
 
 const postsReducer = (state = { isLoading: true, posts: [] }, action) => {
@@ -46,9 +47,20 @@ const postsReducer = (state = { isLoading: true, posts: [] }, action) => {
     case LIKE:
       return {
         ...state,
-        posts: state.posts.posts.map((post) =>
+        posts: state.posts.map((post) =>
           post._id === action.payload._id ? action.payload : post
         ),
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          // change the post that just received a comment
+          if (post._id === action.payload._id) return action.payload;
+
+          // return all other posts
+          return post;
+        }),
       };
 
     default:

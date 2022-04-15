@@ -6,6 +6,7 @@ export default makeStyles((theme) => ({
     objectFit: "cover",
     width: "100%",
     maxHeight: "600px",
+    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.15)",
   },
   card: {
     display: "flex",
@@ -22,6 +23,7 @@ export default makeStyles((theme) => ({
   },
   imageSection: {
     marginLeft: "20px",
+
     flex: 1,
     [theme.breakpoints.down("sm")]: {
       marginLeft: 0,
@@ -40,5 +42,14 @@ export default makeStyles((theme) => ({
     padding: "20px",
     borderRadius: "15px",
     height: "39vh",
+  },
+  commentsOuterContainer: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  commentsInnerContainer: {
+    maxHeight: "200px",
+    overflowY: "auto",
+    marginBottom: "30px",
   },
 }));

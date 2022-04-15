@@ -2,6 +2,18 @@ import mongoose from "mongoose";
 
 import Post from "../models/postModel.js";
 
+export const getPost = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const post = await Post.findById(id);
+
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const getPosts = async (req, res) => {
   const { page } = req.query;
 
@@ -46,25 +58,12 @@ export const getPostsBySearch = async (req, res) => {
   }
 };
 
-export const getPost = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const post = await Post.findById(id);
-
-    res.status(200).json(post);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
-
 export const createPost = async (req, res) => {
   const post = req.body;
 
   const newPost = new Post({
     ...post,
     creator: req.userId,
-    createdAt: new Date().toISOString(),
   });
 
   try {
@@ -120,7 +119,7 @@ export const likePost = async (req, res) => {
   const index = post.likes.findIndex((id) => id === String(req.userId)); // if id is equal to String of user id
 
   if (index === -1) {
-    // If his id is not in index
+    // If its id is not in index
     // Like the post
     post.likes.push(req.userId);
   } else {
@@ -129,6 +128,21 @@ export const likePost = async (req, res) => {
   }
 
   const updatedPost = await Post.findByIdAndUpdate(id, post, { new: true });
+
+  res.json(updatedPost);
+};
+
+export const commentPost = async (req, res) => {
+  const { id } = req.params;
+  const { value } = req.body;
+
+  const post = await Post.findById(id);
+
+  post.comments.push(value);
+
+  const updatedPost = await Post.findByIdAndUpdate(id, post, {
+    new: true,
+  });
 
   res.json(updatedPost);
 };

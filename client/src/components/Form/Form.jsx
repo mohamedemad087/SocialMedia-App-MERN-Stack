@@ -14,15 +14,17 @@ const Form = ({ currentId, setCurrentId }) => {
     tags: "",
     selectedFile: "",
   });
+
   const post = useSelector((state) =>
     currentId
       ? state.posts.posts.find((specificPost) => specificPost._id === currentId)
       : null
   );
-  const classes = useStyles();
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem("profile"));
   const history = useHistory();
+
+  const classes = useStyles();
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     if (post) setPostData(post);
@@ -36,13 +38,13 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (currentId === 0) {
-      dispatch(createPost({ ...postData, name: user?.result?.name }, history));
-      clear();
-    } else {
+    if (currentId) {
       dispatch(
         updatePost(currentId, { ...postData, name: user?.result?.name })
       );
+      clear();
+    } else {
+      dispatch(createPost({ ...postData, name: user?.result?.name }, history));
       clear();
     }
   };

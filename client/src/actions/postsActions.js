@@ -1,12 +1,13 @@
 import {
+  START_LOADING,
+  STOP_LOADING,
   FETCH_POST,
   FETCH_ALL,
   FETCH_BY_SEARCH,
-  START_LOADING,
-  STOP_LOADING,
   CREATE,
   UPDATE,
   DELETE,
+  ADD_COMMENT,
   LIKE,
 } from "../constants/actionTypes";
 import * as api from "../api";
@@ -100,6 +101,18 @@ export const likePost = (id) => async (dispatch) => {
     const { data } = await api.likePost(id);
 
     dispatch({ type: LIKE, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addComment = (value, id) => async (dispatch) => {
+  try {
+    const { data } = await api.addComment(value, id);
+
+    dispatch({ type: ADD_COMMENT, payload: data });
+
+    return data.comments;
   } catch (error) {
     console.log(error);
   }
