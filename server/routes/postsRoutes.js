@@ -2,6 +2,7 @@ import express from "express";
 
 import {
   getPostsBySearch,
+  getPost,
   getPosts,
   createPost,
   updatePost,
@@ -15,6 +16,7 @@ const router = express.Router();
 
 // Adding routes
 router.get("/search", getPostsBySearch);
+router.get("/:id", getPost);
 router.get("/", getPosts);
 router.post("/", auth, createPost);
 // :id is to make id dynamic
