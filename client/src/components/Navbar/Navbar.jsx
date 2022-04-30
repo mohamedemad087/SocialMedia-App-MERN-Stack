@@ -4,8 +4,7 @@ import { AppBar, Typography, Toolbar, Button, Avatar } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
 
-import memoriesLogo from "../../images/memoriesLogo.png";
-import memoriesText from "../../images/memoriesText.png";
+import Logo from "../../images/logo.png";
 import useStyles from "./styles";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -19,7 +18,6 @@ const Navbar = () => {
 
   const theme = useTheme();
   const smallScreens = useMediaQuery(theme.breakpoints.up("sm"));
-  const verySmallScreens = useMediaQuery(theme.breakpoints.up(375));
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
@@ -44,19 +42,8 @@ const Navbar = () => {
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <Link to="/" className={classes.brandContainer}>
-        <img
-          component={Link}
-          to="/"
-          src={memoriesText}
-          alt="icon"
-          height="45px"
-        />
-        <img
-          className={classes.image}
-          src={memoriesLogo}
-          alt="icon"
-          height="40px"
-        />
+        <img className={classes.image} src={Logo} alt="icon" height="40px" />
+        <span className={classes.brandName}>LENS</span>
       </Link>
 
       <Toolbar className={classes.toolbar}>

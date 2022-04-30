@@ -24,7 +24,7 @@ app.use("/posts", postsRoutes);
 app.use("/users", usersRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Welcome to memories API");
+  res.send("Welcome to Lens API");
 });
 
 const PORT = process.env.PORT || 5000;

@@ -83,7 +83,7 @@ const Home = () => {
                 onKeyDown={handleKeyPress}
                 name="search"
                 variant="outlined"
-                label="Search Memories"
+                label="Search by title"
                 fullWidth
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -94,7 +94,7 @@ const Home = () => {
                 value={tags}
                 onAdd={(chip) => handleAddChip(chip)}
                 onDelete={(chip) => handleDeleteChip(chip)}
-                label="Search Tags"
+                label="Search by tag"
                 variant="outlined"
               />
 

@@ -9,7 +9,7 @@ export default makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "10px 50px",
+    padding: "0 15px",
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
     },
@@ -54,6 +54,12 @@ export default makeStyles((theme) => ({
   brandContainer: {
     display: "flex",
     alignItems: "center",
+    textDecoration: "none",
+  },
+  brandName: {
+    margin: "8px 0 0 10px",
+    fontSize: "45px",
+    color: "#2FAAD5",
   },
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
