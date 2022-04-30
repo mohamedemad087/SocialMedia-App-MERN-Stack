@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
-//const API = axios.create({ baseURL: 'https://portfolio-web-application.herokuapp.com'});
+// const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create({ baseURL: "https://lensshoots.herokuapp.com/" });
 
 // This will be happen before all requests
 // We need this because we have to send our token back to our backend so, middleware can verify that we are actually logged in
