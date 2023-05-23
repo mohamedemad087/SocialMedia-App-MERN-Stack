@@ -1,7 +1,6 @@
 # Lens
 
 > Lens is an social-media MERN Stack application, built with MongoDB, Express.js, React.js, Node.js, Redux, Material UI.
-> Live demo [_here_](https://bre.is/QRfEt3Vu).
 
 ## Installation and Setup Instructions
 
